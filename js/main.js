@@ -38,9 +38,9 @@ console.log(inputNumber);
             $("#d3_segment").append(
             '<div class="geneName" style="width:'+99/inputNumber+'%">'+genesArray[i]+'</h1></div>');  
         }
-        $("#d3_segment").append('<div class="geneName" id="segmentCN">loading<div>');
-       startAllGenes(genesArray);
-       $("#segmentCN").remove();
+        $("#d3_segment").append('<div  id="segmentCN"><h3>Loading Data...</h3><div>');
+        startAllGenes(genesArray);
+        $("#segmentCN").remove();
     }
   
 }
