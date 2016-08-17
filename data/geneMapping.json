@@ -1,0 +1,24 @@
+{
+                        "KRAS": {
+                                 "chr": 12,
+                                "bpStart": 25204789,
+                                "bpEnd": 25252093
+                                },
+                        "NRAS": {
+                                "chr": 1,
+                                "bpStart": 115247084,
+                                "bpEnd": 115259515 
+                                },
+                        "BRAF": {"chr": 7,
+                                "bpStart": 140433812,
+                                "bpEnd": 140624564
+                                },
+                         "BRCA1": {"chr": 1,
+                            "bpStart":41196311,
+                            "bpEnd": 41277500
+                            },
+                        "BRCA2": {"chr": 13,
+                                "bpStart":32889616,
+                                "bpEnd": 32973809
+                                }
+                        }

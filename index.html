@@ -1,0 +1,57 @@
+
+<!---
+ - Code written by: Linghong Chen, final revision on August 10, 2016
+ - Authors: Linghong Chen
+ - This file is written for igv.js
+ - Code is written on August 11, 2016
+ -->
+<!DOCTYPE HTML>
+<html>
+<body>
+<head lang="en">
+    <title>Gene Compare</title>
+    <meta characet="utf-8">
+    <link rel="stylesheet" href="css/style.css">
+ 
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+   <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://d3js.org/queue.v1.min.js"></script>
+</head>
+
+    <br>
+    <form>
+    <div class="form-group">
+        <label>Please select cancer group you want to look for </label><input >
+    </div>
+    <div class="form-group">
+        <label>Please select genes you want to look for </label><input >
+    </div>
+    <div  class="btn" onclick="prepDataForSegView()">Submit</div>
+    </form>
+    
+    <div class="section" >
+        <!--display igv-->
+        <div class="" id="gene_tab" >
+            <div class="" id="sort" >
+  
+            </div>
+            <div class="" id="d3_segment" >
+  
+            </div>
+        </div>
+    </div>
+<script src="js/main.js"></script>
+<script src="js/readTextFile.js"></script>
+<script src="js/segmentCNViz.js"></script>
+
+<foot>
+</foot>
+</body>
+</html>
