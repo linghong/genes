@@ -19,6 +19,7 @@ D3SegmentCNViz = function(_data, _genes, _geneMapping){
     this.yScale = d3.scale.ordinal().rangeRoundBands([0, this.height], .8, 0);
     this.min=0;
     this.initViz();
+
 }
 
 D3SegmentCNViz.prototype.initViz = function(){ 
@@ -70,6 +71,7 @@ D3SegmentCNViz.prototype.initViz = function(){
                     }                           
                 }); 
     } 
+    $("#segmentCN").remove();
 }          
 
 
