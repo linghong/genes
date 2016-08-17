@@ -1,4 +1,6 @@
-
+body{
+	padding:20px;
+}
 
 .igv-ui-tabs{
     display: block;
@@ -12,6 +14,9 @@
     border: 1px solid #aaaaaa;
     padding: 2px;
     background: none;
+}
+#gene_tab{
+	visualibility: hidden;
 }
 .gene_segmentCN{
   border: 1px solid blue;

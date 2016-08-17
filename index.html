@@ -7,7 +7,7 @@
  -->
 <!DOCTYPE HTML>
 <html>
-<body>
+
 <head lang="en">
     <title>Gene Compare</title>
     <meta characet="utf-8">
@@ -24,34 +24,37 @@
    <script src="https://d3js.org/d3.v3.min.js"></script>
 
 </head>
-
-    <br>
-    <form>
-    <div class="form-group">
-        <label>Please select cancer group you want to look for </label><input >
-    </div>
-    <div class="form-group">
-        <label>Please select genes you want to look for </label><input >
-    </div>
-    <div  class="btn" onclick="prepDataForSegView()">Submit</div>
-    </form>
-    
-    <div class="section" >
-        <!--display igv-->
-        <div class="" id="gene_tab" >
-            <div class="" id="sort" >
-  
+<body>
+    <section class="row">
+        <div class="col-lg-12">
+            <H2>This page intends to use publically available data to comapre the gene copy number alteration in cancer patients' genomic segments. </h2>
+            <h3> The Page Currently Is Still Under Construction</h3>
+        </div>
+        <form class="col-lg-12">
+            <div class="form-group">
+                <label>Please input the segment copy number file you want to look for. If you leave it empty, we will use the default data in our system. </label><br><br>
+                <input class="col-lg-3"><br>
             </div>
-            <div class="" id="d3_segment" >
-  
+            <div class="form-group">
+                <label>Please select genes you want to look for. If you leave it empty, we will use the default gene set in our system. </label><br><br>
+                <input class="col-lg-3"><br>
+            </div>
+            <div  class="col-lg-offset-6 col-lg-2 btn btn-primary btn-lg" onclick="prepDataForSegView()">Submit</div>
+        </form>
+    </section>
+    <main class="row" >
+        <!--display igv-->
+        <div class="col-lg-12" id="gene_tab" >
+            <div class="col-lg-12" id="sort" >
+
+            </div>
+            <div class="col-lg-12" id="d3_segment" >
+ 
             </div>
         </div>
-    </div>
+    </main>
 <script src="js/main.js"></script>
 <script src="js/readTextFile.js"></script>
 <script src="js/segmentCNViz.js"></script>
-
-<foot>
-</foot>
 </body>
 </html>

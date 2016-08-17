@@ -8,7 +8,6 @@ var prepDataForSegView = function () {
     var genes = "KRAS,NRAS,BRAF";
     var url = "data/tcga_cna.seg";
     if (!data_fetched) {
-
         data_fetched = true;   
         fileData= new ReadTextFile(url);
         showAllGenesPanel(genes); 
@@ -17,7 +16,7 @@ var prepDataForSegView = function () {
 
 
 var showAllGenesPanel = function (genes){
-    
+    $("#gene_tab").show();
     var genesArray = genes.split(',');
     console.log(genesArray);
     var inputNumber = genesArray.length; 
@@ -25,6 +24,7 @@ var showAllGenesPanel = function (genes){
 console.log(inputNumber);
 
     if($('input[name="sort"]').length==0){
+        $("#sort").append("Sort By:");
         for (i=0; i<inputNumber; i++){
             console.log(genesArray[i]);
             $("#sort").append(
