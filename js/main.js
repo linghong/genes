@@ -2,31 +2,80 @@
 var data_fetched = false;
 var allGenesCN = false;
 var fileData;
+var geneID={};
+var geneInfo={};
+var geneName=['KRAS','NRAS','BRAF'];
+ var geneStartBp;
+var geneEndBp;
 
 //function for clicking event that is used to lauch IGVJS tab and fetch data
 var prepDataForSegView = function () {
+    $.ajax({
+        type: "GET",
+        crossOrigin: true,
+        headers: {
+            'Access-Control-Allow-Origin': '*'
+        },
+        url:"http://www.genenames.org/cgi-bin/download?col=gd_app_sym&col=gd_pub_eg_id&status_opt=2&chr=1&chr=2&chr=3&chr=4&chr=5&chr=6&chr=7&chr=8&chr=9&chr=10&chr=11&chr=12&chr=13&chr=14&chr=15&chr=16&chr=17&chr=18&chr=19&chr=20&chr=21&chr=22&chr=X&chr=Y&where=&order_by=gd_app_sym_sort&format=text&limit=&hgnc_dbtag=on&submit=submit",  
+        success : function (data) {
+            lines = data.split('\n');
+
+            for(i=1;i<lines.length; i++){
+                units = lines[i].split('\t');
+                geneInfo[units[0]]=units[1];                      
+            }
+
+            for(var j=0; j<geneName.length;j++){                      
+                if(geneInfo[geneName[j]]){
+                    geneID[geneName[j]]=geneInfo[geneName[j]]; 
+                    getGenePosition(geneID[geneName[j]]);
+                    console.log(geneStartBp,geneEndBp);   
+                }else{
+                    alert("The gene symbol "+geneName+ " is incorrect.");
+                }  
+            }      
+
+        },
+        error : function (data, errorThrown,status) {
+                console.log("something wrong when fetch a gene ID.")                                    
+            }  
+  
+   }); 
+   
+
     var genes = "KRAS,NRAS,BRAF";
     var url = "data/tcga_cna.seg";
     if (!data_fetched) {
         data_fetched = true;   
         fileData= new ReadTextFile(url);
+        
+
+       
         showAllGenesPanel(genes); 
     } 
 }
 
+var getGenePostion= function(geneId){
+    var geneLousUrl = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=gene&id="+geneId+"&retmode=json";
+    var geneLocusData= new ReadInternetFile(geneLousUrl);
+    geneLocusData.read();
+    var infoSet=[];  
+    var startIndex = lines[6].indexOf("(")+1;
+    var midIndex = lines[6].indexOf("..");
+    var endIndex = lines[6].indexOf(", ");
+    geneStartBp= lines[6].slice(startIndex, midIndex);
+    geneEndBp= lines[6].slice(midIndex+2, endIndex);
+}
 
 var showAllGenesPanel = function (genes){
     $("#gene_tab").show();
     var genesArray = genes.split(',');
-    console.log(genesArray);
     var inputNumber = genesArray.length; 
-
-console.log(inputNumber);
 
     if($('input[name="sort"]').length==0){
         $("#sort").append("Sort By:");
         for (i=0; i<inputNumber; i++){
-            console.log(genesArray[i]);
+
             $("#sort").append(
             '<label><input type="radio" name="sort" value="' + genesArray[i]+'"  onclick="checkedSort()"/>'+genesArray[i]+'</label>'); 
         }
@@ -34,7 +83,7 @@ console.log(inputNumber);
    
     if(allGenesCN==false) {
         for (i=0; i<inputNumber; i++){
-            console.log(genesArray[i]);
+
             $("#d3_segment").append(
             '<div class="geneName" style="width:'+99/inputNumber+'%">'+genesArray[i]+'</h1></div>');  
         }
@@ -50,22 +99,7 @@ var startAllGenes = function(genesArray){
 
     d3.json("data/geneMapping.json", function(geneMapping) {
         console.log(geneMapping);
-        fileData.read();        
-        var lines=[];
-        lines = allText.split('\n');
-       /* var samples =[];
-        var previousName = "";
-        for(var i=1; i<lines.length-1; i++){
-            var segments = lines[i].split('\t')[0];  
-            if(segment!=previousName) {
-                samples.push("segmentName");
-            }
-            previousName= segmentName;
-        }
-        console.log(samples);*/
-    /*  var geneinfo = new BroadInstituteGeneInfo (genesArray);
-        geneinfo.getGeneMapping();
-    */  
+        fileData.read();         
          
         for(j =0; j<genesArray.length; j++){
             var geneName= genesArray[j];
@@ -111,13 +145,6 @@ var startAllGenes = function(genesArray){
                         "value": averageVal
                        });
                 } 
-     
-                /* var geneSegmentVal = (bpEnd-bpStart)*averageVal; 
-                var value =  samples['"'+data['"'+geneName+'"'].sample+'"'] ;
-                samples['"'+data['"'+geneName+'"'].sample+'"'] = value -1+ geneSegmentVal;
-                console.log("samples");
-                console.log(samples);
-                */
             }
 
         }

@@ -1,18 +1,11 @@
-/**
-* readTextFile
-* @author: Linhong Chen
-* @constructor
-* date: Augst 2, 2016
-* 
-*/
-
-ReadTextFile = function(_file){
-    this.file = _file;
+ReadInternetFile = function(_url){
+    this.url = _url;
 }
 
-ReadTextFile.prototype.read = function(){
+ReadInternetFile.prototype.read = function(){
     var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", this.file, false);
+    rawFile.open("GET", this.url, false);
+    rawFile.withCredentials = false;
     rawFile.onreadystatechange = function ()
     {
         if(rawFile.readyState === 4)
@@ -22,7 +15,6 @@ ReadTextFile.prototype.read = function(){
                 var allText = rawFile.responseText;
                 lines=[];
                 lines = allText.split('\n');
-
             }
         }
     }
